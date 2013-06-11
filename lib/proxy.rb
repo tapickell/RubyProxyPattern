@@ -1,13 +1,26 @@
 class Proxy
-	def intilize(&creation_block)
-		@creation_block = creation_block
+	attr_reader :subject
+
+	def intialize(subject)
+		@subject = subject
 	end
 
 	def method_missing(name, *args)
 		@subject.send(name, *args)
 	end
 
-	def subject
-		@subject ||= @creation_block.call 
+	def to_s
+		#s = subject
+		@subject.to_s
+	end
+end
+
+class Box
+	def initialize(name)
+		@name = name
+	end
+
+	def to_s
+		@name
 	end
 end
