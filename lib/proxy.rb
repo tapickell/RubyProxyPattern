@@ -1,18 +1,23 @@
 class BoxProxy
-	attr_reader :subject
 
-	def initialize(subject)
-		@subject = subject
+	def initialize(&block)
+		@block = block
 	end
 
 	def method_missing(name, *args)
-		@subject.send(name, *args)
+    s = subject
+		s.send(name, *args)
 	end
 
 	def to_s
-		#s = subject
-		@subject.to_s
+		s = subject
+		s.to_s
 	end
+
+  def subject
+    @subject || (@subject = @block.call)
+    @subject
+  end
 end
 
 class Box
@@ -25,4 +30,8 @@ class Box
 	def to_s
 		@name
 	end
+
+  def yo
+    "I'm in a box!"
+  end
 end
