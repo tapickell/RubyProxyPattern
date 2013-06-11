@@ -1,7 +1,7 @@
-class Proxy
+class BoxProxy
 	attr_reader :subject
 
-	def intialize(subject)
+	def initialize(subject)
 		@subject = subject
 	end
 
@@ -16,6 +16,8 @@ class Proxy
 end
 
 class Box
+  attr_reader :name
+
 	def initialize(name)
 		@name = name
 	end
